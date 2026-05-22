@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aseem | AI/ML &amp; Systems Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Strict Monospace Configuration for Data Subtexts */
+        .hud-bottom-bar, .top-nav, .project-meta, .coord-box, .view-case-link, .preloader-percentage, .ticker-text, .section-number, .sub-heading-ticker {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- PRELOADER GATE --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .loader-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        /* --- CUSTOM HUD CURSOR --- */
+        .custom-cursor {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none; 
+            z-index: 9999;
+            will-change: transform;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+        }
+
+        .custom-cursor-dot {
+            width: 5px;
+            height: 5px;
+            background-color: #ffffff; 
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform;
+        }
+
+        .custom-cursor.hovering {
+            width: 65px;
+            height: 65px;
+            background-color: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* --- HERO HEADER PLATFORM --- */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #141414;
+            padding-bottom: 15px;
+            z-index: 10;
+        }
+
+        .top-nav nav a {
+            color: #555;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.2s;
+        }
+
+        .top-nav nav a:hover {
+            color: #fff;
+        }
+
+        .center-content {
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+            z-index: 10;
+        }
+
+        .sub-heading-ticker {
+            color: #666;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .center-content h1 {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .center-content p {
+            color: #8c8c8c;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .cta-btn {
+            background: transparent;
+            border: 1px solid #2d2d2d;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .hud-bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #141414;
+            padding-top: 20px;
+            z-index: 10;
+        }
+
+        .ticker-container {
+            display: flex;
+            gap: 40px;
+            color: #8c8c8c;
+        }
+
+        .ticker-text span {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .hud-scroll {
+            color: #666;
+        }
+
+        .hud-coordinates {
+            display: flex;
+            gap: 24px;
+        }
+
+        .coord-box {
+            width: 120px; 
+            color: #555;
+        }
+        
+        .coord-box span {
+            color: #ffffff;
+        }
+
+        /* --- REPOSITORY WORK LOGS SECTION --- */
+        .portfolio-section {
+            padding: 100px 40px;
+            border-top: 1px solid #141414;
+            background-color: #000000;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid #141414;
+            padding-bottom: 20px;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .section-number {
+            color: #444;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            margin-bottom: 80px;
+        }
+
+        .grid-card {
+            background-color: #030303;
+            border: 1px solid #121212;
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 420px;
+            transition: opacity 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+            position: relative;
+        }
+
+        .work-grid:hover .grid-card {
+            opacity: 0.25;
+        }
+
+        .work-grid .grid-card:hover {
+            opacity: 1;
+            border-color: #2c2c2c;
+            transform: translateY(-4px);
+        }
+
+        /* Bento Grid Width Configurations from Video Spec */
+        .col-4 { grid-column: span 4; }
+        .col-5 { grid-column: span 5; }
+        .col-6 { grid-column: span 6; }
+        .col-7 { grid-column: span 7; }
+        .col-8 { grid-column: span 8; }
+        .col-12 { grid-column: span 12; }
+
+        .project-meta {
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .project-title {
+            font-size: 26px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .project-desc {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .view-case-link {
+            color: #444;
+            text-decoration: none;
+            margin-top: auto;
+            padding-top: 20px;
+            transition: color 0.2s ease;
+        }
+
+        .grid-card:hover .view-case-link {
+            color: #ffffff;
+        }
+
+        /* --- SKILLS & CAPABILITIES LOGS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 40px 20px;
+            border-top: 1px solid #141414;
+            padding-top: 60px;
+        }
+
+        .skill-column {
+            grid-column: span 3;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-header {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: #ffffff;
+            border-bottom: 1px solid #141414;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill-body {
+            color: #8c8c8c;
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* --- EXPERIENCE ENGINE LOGS --- */
+        .experience-section {
+            padding: 60px 40px 100px 40px;
+            background-color: #000000;
+        }
+
+        .exp-row {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            padding: 30px 0;
+            border-bottom: 1px solid #141414;
+        }
+
+        .exp-time {
+            grid-column: span 3;
+            color: #555;
+        }
+
+        .exp-company-role {
+            grid-column: span 4;
+        }
+
+        .exp-company {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .exp-role {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: #8c8c8c;
+            text-transform: uppercase;
+        }
+
+        .exp-desc {
+            grid-column: span 5;
+            color: #8c8c8c;
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="loader-icon">⎔</div>
+        <div class="preloader-percentage"><span id="load-count">0</span>%</div>
+    </div>
+
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-dot"></div>
+
+    <main class="hero-section" id="hero-main">
+        <header class="top-nav">
+            <div class="logo">ASEEM</div>
+            <nav>
+                <a href="#work" class="interactive">PROJECTS</a>
+                <a href="#experience" class="interactive">EXPERIENCE</a>
+                <a href="https://www.linkedin.com/in/aseem-kumar-190b8876" target="_blank" class="interactive">LINKEDIN</a>
+                <a href="https://github.com/aseem395" target="_blank" class="interactive">GITHUB</a>
+            </nav>
+        </header>
+
+        <section class="center-content">
+            <span class="sub-heading-ticker">// CORE INFRASTRUCTURE LOGGED //</span>
+            <h1 id="scramble-title" data-value="APPLIED AI Systems &amp;&#10;INTELLIGENT PIPELINES">APPLIED AI Systems &amp;<br>INTELLIGENT PIPELINES</h1>
+            <p>AI/ML Engineer designing and optimizing deep learning architectures, scalable backend infrastructures, production-ready application pipelines, and predictive model systems.</p>
+            <div class="cta-btn-group">
+                <a href="mailto:aseemajit@gmail.com" class="cta-btn interactive">CONTACT ENG</a>
+                <a href="#" class="cta-btn interactive">DOWNLOAD CV [PDF]</a>
+            </div>
+        </section>
+
+        <footer class="hud-bottom-bar">
+            <div class="ticker-container">
+                <div class="ticker-text">SYS_STATUS: <span>ACTIVE</span></div>
+                <div class="ticker-text">LOC: <span>PUNE, IN</span></div>
+                <div class="ticker-text">STACK: <span>PYTHON // TF // PT // JS</span></div>
+            </div>
+            <div class="hud-scroll">
+                ↓ SCROLL TO CORE LOGS
+            </div>
+            <div class="hud-coordinates">
+                <div class="coord-box">SYS_X: <span id="coord-x">000</span></div>
+                <div class="coord-box">SYS_Y: <span id="coord-y">000</span></div>
+            </div>
+        </footer>
+    </main>
+
+    <section id="work" class="portfolio-section">
+        <div class="section-header-row">
+            <h2 class="section-title">SELECTED ARCHITECTURES</h2>
+            <span class="section-number">01 // PROJECTS</span>
+        </div>
+        
+        <div class="work-grid">
+            <div class="grid-card col-7 interactive">
+                <div>
+                    <div class="project-meta">DEEP LEARNING / COMPUTER VISION / ARCHITECTURE OPTIMIZATION</div>
+                    <h3 class="project-title" data-scramble>DEEP LEARNING STRUCTURAL U-NET BENCHMARK</h3>
+                    <p class="project-desc">Compared and benchmarked 8 individual variations of U-Net convolutional frameworks for structural segmentation and pixel-level mask classification[cite: 6, 20]. Implemented end-to-end data pipelines incorporating advanced augmentation matrices and specialized optimization layers built using Python and TensorFlow/PyTorch frameworks[cite: 20, 22].</p>
+                </div>
+                <span class="view-case-link">[ METRICS: DICE COEFFICIENT / IOU ]</span>
+            </div>
+
+            <div class="grid-card col-5 interactive">
+                <div>
+                    <div class="project-meta">MACHINE LEARNING / PREDICTIVE MODELING</div>
+                    <h3 class="project-title" data-scramble>CLINICAL PATHOLOGY PREDICTION SYSTEM</h3>
+                    <p class="project-desc">Engineered high-accuracy predictive classification networks analyzing multi-dimensional clinical datasets[cite: 23, 24]. Managed deep feature engineering workflows, missing data imputation paradigms, and cross-validation execution tracks to optimize real-world diagnostic diagnostic stability metrics[cite: 25, 27].</p>
+                </div>
+                <span class="view-case-link">[ METRICS: F1-SCORE / PRECISION / RECALL ]</span>
+            </div>
+
+            <div class="grid-card col-5 interactive">
+                <div>
+                    <div class="project-meta">MOBILE SYSTEMS / FULL STACK ARCHITECTURE</div>
+                    <h3 class="project-title" data-scramble>ACTIKEV PRODUCTION TRANSACTION ENGINE</h3>
+                    <p class="project-desc">Designed, built, and shipped a full-scale mobile software ecosystem handling end-to-end user state persistence, real-time data orchestration, and automated user booking channels[cite: 17, 29, 31]. Integrated secure third-party payment gateways (Stripe) and deployed stable versions via Expo EAS and TestFlight distribution frameworks[cite: 30, 32].</p>
+                </div>
+                <span class="view-case-link">[ FRAMEWORK: REACT NATIVE / EXPO EAS ]</span>
+            </div>
+
+            <div class="grid-card col-7 interactive">
+                <div>
+                    <div class="project-meta">APPLIED AI / WORKFLOW AUTOMATION / SYSTEM APIS</div>
+                    <h3 class="project-title" data-scramble>AUTONOMOUS BUSINESS WORKFLOWS &amp; AGENTS</h3>
+                    <p class="project-desc">Architected cross-functional LLM conversational engines and automated data management layers utilizing direct REST API mappings[cite: 10, 11]. Developed tailored internal operational software, custom programmatic connectors, and automated messaging pipelines to eliminate overhead across transaction layers[cite: 11, 12].</p>
+                </div>
+                <span class="view-case-link">[ FRAMEWORK: FASTAPI / REST APIS ]</span>
+            </div>
+        </div>
+
+        <div class="section-header-row" style="margin-top: 40px;">
+            <h2 class="section-title">ENGINEERING MATRIX</h2>
+            <span class="section-number">02 // SKILLS</span>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-column">
+                <div class="skill-header">01 // AI &amp; Deep Learning</div>
+                <div class="skill-body">Medical Image Segmentation, U-Net Architecture Optimization, Deep Convolutional Networks, Model Performance Profiling[cite: 36].</div>
+            </div>
+            <div class="skill-column">
+                <div class="skill-header">02 // Machine Learning</div>
+                <div class="skill-body">Advanced Statistical Classification, Algorithmic Comparisons, Feature Extraction, Hyperparameter Tuning, Multi-Metric Evaluation[cite: 37].</div>
+            </div>
+            <div class="skill-column">
+                <div class="skill-header">03 // Frameworks &amp; Languages</div>
+                <div class="skill-body">Python, TensorFlow, PyTorch, JavaScript, React Native Frontend Development Engines[cite: 16, 38].</div>
+            </div>
+            <div class="skill-column">
+                <div class="skill-header">04 // Systems &amp; Tooling</div>
+                <div class="skill-body">FastAPI Backend Construction, REST API Engineering, Git Workflow Pipelines, Postman, PostgreSQL Database Management[cite: 14, 38].</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience-section">
+        <div class="section-header-row">
+            <h2 class="section-title">CHRONOLOGY OF SERVICE</h2>
+            <span class="section-number">03 // EXPERIENCE</span>
+        </div>
+
+        <div class="exp-row">
+            <div class="exp-time">2026 // FEB — MAY</div>
+            <div class="exp-company-role">
+                <div class="exp-company">BONDIGITALLY</div>
+                <div class="exp-role">AI &amp; Automation Developer Intern [cite: 9]</div>
+            </div>
+            <div class="exp-desc">
+                Constructed multi-agent conversational tools, engineered automated enterprise pipelines integrating API pathways, and shipped functional internal utility software layers[cite: 10, 11, 12].
+            </div>
+        </div>
+
+        <div class="exp-row">
+            <div class="exp-time">2025 // JUL — 2026 // JAN</div>
+            <div class="exp-company-role">
+                <div class="exp-company">PATHNOVO SOLUTIONS</div>
+                <div class="exp-role">Sole Mobile Engineer [cite: 16]</div>
+            </div>
+            <div class="exp-desc">
+                Held structural end-to-end accountability for designing, testing, optimizing, and launching production-level mobile architecture solutions backed by real-time synchronization[cite: 17].
+            </div>
+        </div>
+
+        <div class="exp-row">
+            <div class="exp-time">2025 // JUN — SEP</div>
+            <div class="exp-company-role">
+                <div class="exp-company">M/S EHEALTH-CARE</div>
+                <div class="exp-role">App Developer Intern [cite: 13]</div>
+            </div>
+            <div class="exp-desc">
+                Developed scalable backend structures and full-stack system routes combining high-performance FastAPI configurations with structured PostgreSQL relational schemas[cite: 14, 15].
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const preloader = document.getElementById('preloader');
+        const heroMain = document.getElementById('hero-main');
+        const loadCount = document.getElementById('load-count');
+        
+        // --- 1. PRELOADER LOADING COUNTER TIMER ---
+        let count = 0;
+        const counterInterval = setInterval(() => {
+            count += Math.floor(Math.random() * 5) + 1;
+            if (count >= 100) {
+                count = 100;
+                clearInterval(counterInterval);
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    heroMain.style.opacity = '1';
+                    scrambleText(document.getElementById('scramble-title'));
+                }, 600);
+            }
+            loadCount.textContent = count;
+        }, 30);
+
+        // --- 2. ADVANCED CYBER DECRYPT TEXT SCRAMBLE ENGINE ---
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ✕♦₿⎔0123456789//_#";
+        
+        function scrambleText(element) {
+            let iteration = 0;
+            const originalText = element.getAttribute('data-value') || element.innerText;
+            clearInterval(element.interval);
+            
+            element.interval = setInterval(() => {
+                element.innerHTML = originalText
+                    .split("")
+                    .map((letter, index) => {
+                        if(letter === "\n" || letter === " " || index < iteration) {
+                            return originalText[index] === "\n" ? "<br>" : originalText[index];
+                        }
+                        return letters[Math.floor(Math.random() * letters.length)];
+                    })
+                    .join("");
+                
+                if(iteration >= originalText.length){ 
+                    clearInterval(element.interval);
+                }
+                iteration += 1 / 2;
+            }, 25);
+        }
+
+        document.querySelectorAll('.grid-card').forEach(card => {
+            const heading = card.querySelector('[data-scramble]');
+            if(heading) {
+                card.addEventListener('mouseenter', () => scrambleText(heading));
+            }
+        });
+
+        // --- 3. HARDWARE-ACCELERATED LERP CURSOR TRACKING OVERLAY ---
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.custom-cursor-dot');
+        const coordX = document.getElementById('coord-x');
+        const coordY = document.getElementById('coord-y');
+
+        let targetX = -100, targetY = -100;
+        let currentX = -100, currentY = -100;
+
+        window.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            
+            cursorDot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
+            coordX.textContent = Math.round(targetX).toString().padStart(3, '0');
+            coordY.textContent = Math.round(targetY).toString().padStart(3, '0');
+        });
+
+        document.querySelectorAll('.interactive').forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        function animateCursor() {
+            currentX += (targetX - currentX) * 0.14;
+            currentY += (targetY - currentY) * 0.14;
+            cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+    </script>
+</body>
+</html>
