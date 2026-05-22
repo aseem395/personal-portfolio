@@ -36,16 +36,26 @@ export default function CustomCursor() {
       gsap.to(cursor, {
         width: 48,
         height: 48,
+        rotation: 90,
         duration: 0.3,
         ease: "power2.out"
+      });
+      gsap.to('.cursor-corner', {
+        opacity: 1,
+        duration: 0.3
       });
     };
     const handleMouseLeave = () => {
       gsap.to(cursor, {
-        width: 12,
-        height: 12,
+        width: 32,
+        height: 32,
+        rotation: 0,
         duration: 0.3,
         ease: "power2.out"
+      });
+      gsap.to('.cursor-corner', {
+        opacity: 0.4,
+        duration: 0.3
       });
     };
 
@@ -74,9 +84,20 @@ export default function CustomCursor() {
   }, []);
 
   return (
-    <div
-      ref={cursorRef}
-      className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
-    />
+    <>
+      <div
+        ref={cursorRef}
+        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] mix-blend-difference"
+      >
+        <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-[1.5px] border-l-[1.5px] border-white opacity-40 cursor-corner" />
+        <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-[1.5px] border-r-[1.5px] border-white opacity-40 cursor-corner" />
+        <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-[1.5px] border-l-[1.5px] border-white opacity-40 cursor-corner" />
+        <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-[1.5px] border-r-[1.5px] border-white opacity-40 cursor-corner" />
+      </div>
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
+      />
+    </>
   );
 }
