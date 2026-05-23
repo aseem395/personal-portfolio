@@ -4,6 +4,7 @@ import "./globals.css";
 import ScrollProvider from "@/lib/ScrollProvider";
 import NoiseOverlay from "@/components/NoiseOverlay";
 import GridFrame from "@/components/GridFrame";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <NoiseOverlay />
         <GridFrame />
+        <CustomCursor />
         <ScrollProvider>
           <main className="relative min-h-screen pt-[48px] pb-[64px] px-[24px] md:px-[40px]">
             {children}

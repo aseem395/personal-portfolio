@@ -21,7 +21,7 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <div className="flex flex-col w-full relative z-10">
+    <section id="experience" className="flex flex-col w-full relative z-10 scroll-mt-32">
       <h2 className="text-[22px] font-normal tracking-wide text-white mb-12">EXPERIENCE</h2>
 
       <div className="flex flex-col border-l border-[#222]">
@@ -53,6 +53,6 @@ export default function ExperienceSection() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

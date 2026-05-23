@@ -107,7 +107,7 @@ export default function HudCoordinates() {
             </div>
             <div className="flex flex-col justify-center h-full px-8 min-w-[140px] border-r border-[#222] lg:border-none">
               <span className="text-[#eee] font-bold text-[10px] tracking-widest mb-1">STACK</span>
-              <span className="text-[#888] text-[9px] tracking-widest">PYTHON // PT</span>
+              <span className="text-[#888] text-[9px] tracking-widest">PYTHON // PYTORCH // C++ // TYPESCRIPT // NEXT.JS // REACT NATIVE</span>
             </div>
           </div>
           

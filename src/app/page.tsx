@@ -1,9 +1,9 @@
 import Preloader from "@/components/Preloader";
-import CustomCursor from "@/components/CustomCursor";
 import TopNav from "@/components/TopNav";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
 import ExperienceSection from "@/components/ExperienceSection";
+import CertificationsSection from "@/components/CertificationsSection";
 import SpecializationSection from "@/components/SpecializationSection";
 import HudCoordinates from "@/components/HudCoordinates";
 import HeroText from "@/components/HeroText";
@@ -14,7 +14,6 @@ export default function Home() {
   return (
     <>
       <Preloader />
-      <CustomCursor />
       <HudCoordinates />
       
       <main className="w-full relative z-10 p-2 md:p-4">
@@ -69,10 +68,11 @@ export default function Home() {
 
           <ProjectsSection />
           
-          {/* Dual Column Layout for Experience and Skills */}
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32 py-24 border-t border-[#141414]">
+          {/* Triple Column Layout for Experience, Skills, and Certifications */}
+          <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16 lg:gap-24 py-24 border-t border-[#141414]">
             <ExperienceSection />
             <SkillsSection />
+            <CertificationsSection />
           </section>
         </div>
       </main>
