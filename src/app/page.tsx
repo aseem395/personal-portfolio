@@ -5,7 +5,6 @@ import SkillsSection from "@/components/SkillsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import CertificationsSection from "@/components/CertificationsSection";
 import SpecializationSection from "@/components/SpecializationSection";
-import HudCoordinates from "@/components/HudCoordinates";
 import HeroText from "@/components/HeroText";
 import ScrollFadeOutWrapper from "@/components/ScrollFadeOutWrapper";
 import Footer from "@/components/Footer";
@@ -14,7 +13,6 @@ export default function Home() {
   return (
     <>
       <Preloader />
-      <HudCoordinates />
       
       <main className="w-full relative z-10 p-2 md:p-4">
         <div className="w-full h-full relative">

@@ -9,7 +9,7 @@ export default function SpecializationSection() {
           
           {/* Top Category Tags */}
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 text-[#555] font-mono text-[9px] md:text-[10px] tracking-widest uppercase mb-12">
-            <span>MEDICAL IMAGE SEGMENTATION</span>
+            <span>DEEP LEARNING ARCHITECTURES</span>
             <span className="text-[#333]">/</span>
             <span>APPLIED AI SYSTEMS</span>
             <span className="text-[#333]">/</span>
@@ -20,7 +20,7 @@ export default function SpecializationSection() {
 
           {/* Main Specialization Typography */}
           <h2 className="text-white text-2xl md:text-[38px] font-sans font-black tracking-tighter text-center leading-[1.25] max-w-5xl uppercase">
-            ARCHITECTING PRECISION <BrainCircuit className="inline w-8 h-8 md:w-11 md:h-11 mx-2 md:mx-4 -mt-2 text-white" /> MEDICAL IMAGE SEGMENTATION, <Server className="inline w-8 h-8 md:w-11 md:h-11 mx-2 md:mx-4 -mt-2 text-white" /> HIGH-PERFORMANCE CLOUD INFRASTRUCTURE, AND <Database className="inline w-8 h-8 md:w-11 md:h-11 mx-2 md:mx-4 -mt-2 text-white" /> AUTONOMOUS AI SYSTEMS
+            ARCHITECTING ADVANCED <BrainCircuit className="inline w-8 h-8 md:w-11 md:h-11 mx-2 md:mx-4 -mt-2 text-white" /> DEEP LEARNING MODELS, <Server className="inline w-8 h-8 md:w-11 md:h-11 mx-2 md:mx-4 -mt-2 text-white" /> HIGH-PERFORMANCE CLOUD INFRASTRUCTURE, AND <Database className="inline w-8 h-8 md:w-11 md:h-11 mx-2 md:mx-4 -mt-2 text-white" /> AUTONOMOUS AI SYSTEMS
           </h2>
 
           {/* Subtitle description */}

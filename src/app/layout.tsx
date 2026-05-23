@@ -5,6 +5,7 @@ import ScrollProvider from "@/lib/ScrollProvider";
 import NoiseOverlay from "@/components/NoiseOverlay";
 import GridFrame from "@/components/GridFrame";
 import CustomCursor from "@/components/CustomCursor";
+import HudCoordinates from "@/components/HudCoordinates";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,11 +29,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceMono.variable} h-full antialiased scroll-smooth`}>
-      <body className="min-h-full flex flex-col font-sans">
+    <html lang="en" className={`${inter.variable} ${spaceMono.variable} antialiased`}>
+      <body className="flex flex-col font-sans bg-black text-white">
         <NoiseOverlay />
         <GridFrame />
         <CustomCursor />
+        <HudCoordinates />
         <ScrollProvider>
           <main className="relative min-h-screen pt-[48px] pb-[64px] px-[24px] md:px-[40px]">
             {children}

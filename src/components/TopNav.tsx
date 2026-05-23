@@ -1,31 +1,34 @@
+
+
+
+
 export default function TopNav() {
   return (
     <>
       {/* Global Background Blur covering the top margin and navbar (placed behind GridFrame z-40 so lines stay sharp) */}
-      <div className="fixed top-0 left-0 right-0 h-[52px] md:h-[56px] bg-[#050505]/40 backdrop-blur-md z-[35] pointer-events-none" />
+      <div className="fixed top-0 left-0 right-0 h-[56px] bg-[#050505]/90 backdrop-blur-md z-[35] pointer-events-none" />
 
       <div className="fixed inset-0 z-[45] pointer-events-none p-1 md:p-2">
         <div className="w-full h-full relative">
           {/* The header has no blur itself anymore, it relies on the global layer behind the grid */}
-          <header className="absolute top-[1px] left-[1px] right-[1px] h-[47px] flex justify-between items-center px-8 pointer-events-auto">
-          
-          {/* Left side: Logo + Audio */}
-          <div className="flex items-center gap-6">
-            <div className="font-sans font-black text-[13px] tracking-[0.15em] text-white flex items-center">
-              ASEEM
+          <header className="absolute top-[1px] left-[1px] right-[1px] h-[47px] flex justify-between items-center px-4 md:px-8 pointer-events-auto bg-transparent">
+            {/* Left side: Logo + Audio */}
+            <div className="flex items-center gap-6">
+              <div className="font-sans font-black text-[13px] tracking-[0.15em] text-white flex items-center leading-none mt-[2px]">
+                ASEEM
+              </div>
+              <AudioToggle />
             </div>
-            <AudioToggle />
-          </div>
 
-          {/* Right side: Links */}
-          <nav className="hidden lg:flex items-center gap-8 font-mono text-[10px] font-bold tracking-widest uppercase">
-            <NavLink href="#work">PROJECTS</NavLink>
-            <NavLink href="#experience">EXPERIENCE</NavLink>
-            <NavLink href="https://github.com/aseem395" external>GITHUB</NavLink>
-            <NavLink href="https://www.linkedin.com/in/aseem-kumar-190b8876" external>LINKEDIN</NavLink>
-            <NavLink href="mailto:aseemajit@gmail.com">MAIL</NavLink>
-          </nav>
-        </header>
+            {/* Right side: Links */}
+            <nav className="hidden lg:flex items-center gap-8 font-mono text-[10px] font-bold tracking-widest uppercase leading-none mt-[2px]">
+              <NavLink href="#work">PROJECTS</NavLink>
+              <NavLink href="#experience">EXPERIENCE</NavLink>
+              <NavLink href="https://github.com/aseem395" external>GITHUB</NavLink>
+              <NavLink href="https://www.linkedin.com/in/aseem-kumar-190b8876" external>LINKEDIN</NavLink>
+              <NavLink href="mailto:aseemajit@gmail.com">MAIL</NavLink>
+            </nav>
+          </header>
         </div>
       </div>
     </>
